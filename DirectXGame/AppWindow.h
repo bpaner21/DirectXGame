@@ -3,6 +3,7 @@
 #include "Window.h"
 #include "GraphicsEngine.h"
 #include "SwapChain.h"
+#include "DeviceContext.h"
 
 class AppWindow : public Window
 {
@@ -11,7 +12,6 @@ public:
     ~AppWindow();
 
 	// Inherited from Window
-
 	virtual void onCreate() override;
 	virtual void onUpdate() override;
 	virtual void onDestroy() override;
@@ -19,6 +19,6 @@ public:
 protected:
 
 private:
-	SwapChain* m_swap_chain;
+	SwapChain* m_swap_chain = nullptr;
 };
 

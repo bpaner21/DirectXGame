@@ -7,7 +7,7 @@ int main() {
 
 	if (app.init()) {
 
-		while (app.isRun()) {
+		while (app.isRunning()) {
 
 			app.broadcast();
 		}

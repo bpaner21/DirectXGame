@@ -103,19 +103,21 @@ bool Window::init() {
 	::UpdateWindow(m_hwnd);
 
 	// Set this flag to true to indicate that the window is initialized and running
-	m_is_run = true;
+	m_is_running = true;
 
 	return true;
 }
 
-bool Window::isRun()
+bool Window::isRunning()
 {
-	return m_is_run;
+	return m_is_running;
 }
 
 bool Window::broadcast()
 {
 	MSG msg;
+
+	this->onUpdate();
 
 	// Dispatches incoming sent messages, checks the thread message queue for a posted message, and retrieves the message(if any exist).
 	while (::PeekMessageW(&msg, 0, 0, 0, PM_REMOVE) > 0) {
@@ -123,8 +125,6 @@ bool Window::broadcast()
 		TranslateMessage(&msg);
 		DispatchMessageW(&msg);
 	}
-
-	this->onUpdate();
 
 	// Create a brief pause in the update loop to reduce the load on CPU
 	Sleep(0);
@@ -135,14 +135,14 @@ bool Window::broadcast()
 bool Window::release() {
 
 	// Destroy the window
-	if (!::DestroyWindow(m_hwnd)) {	return false; }
+	if (!::DestroyWindow(m_hwnd)) { return false; }
 
 	return true;
 }
 
 void Window::onDestroy()
 {
-	m_is_run = false;
+	m_is_running = false;
 }
 
 RECT Window::getClientWindowRect()

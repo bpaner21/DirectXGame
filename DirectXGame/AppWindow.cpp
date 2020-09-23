@@ -21,6 +21,11 @@ void AppWindow::onCreate()
 void AppWindow::onUpdate()
 {
 	//Window::onUpdate();
+
+	// Clear the screen with a set background color
+	GraphicsEngine::get()->getImmediateDeviceContext()->clearRenderTargetColor(this->m_swap_chain, 0.2f, 1.0f, 1.0f, 1.0f);
+
+	m_swap_chain->present(false);
 }
 
 void AppWindow::onDestroy()
